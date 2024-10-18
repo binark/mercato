@@ -1,0 +1,9 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: mercato
+  liquibase:
+    change-log: db/changelog/changelog-master.xml
