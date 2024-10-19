@@ -1,0 +1,5 @@
+version: "3"
+tasks:
+  mercato-api:dev:
+    cmd: mvn spring-boot:run -Dspring-boot.run.profiles=dev -f mercato-api/pom.xml
+    desc: Run mercato api with dev profile
