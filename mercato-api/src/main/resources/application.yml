@@ -4,6 +4,6 @@ server:
     context-path: /api
 spring:
   application:
-    name: mercato
+    name: mercato-api
   liquibase:
-    change-log: db/changelog/changelog-master.xml
+    change-log: db/changelog-master.xml

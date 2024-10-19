@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="armel">
+        <tagDatabase tag="1.0.0"/>
+    </changeSet>
+
+    <changeSet id="2" author="armel" labels="DB-INIT-1, 1.0.0">
+        <comment>Create football club table</comment>
+        <createTable tableName="FOOTBALL_CLUB">
+            <column name="ID" type="varchar2(255)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NAME" type="varchar2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACRONYM" type="varchar2(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SLOGAN" type="varchar2(100)"/>
+            <column name="BUDGET" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BIRTHDATE" type="date"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="armel" labels="DB-INIT-2, 1.0.0">
+        <comment>Create player table</comment>
+        <createTable tableName="PLAYER">
+            <column name="ID" type="varchar2(255)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="LASTNAME" type="varchar2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRSTNAME" type="varchar2(100)"/>
+            <column name="PLAYER_NAME" type="varchar2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JERSEY_NUMBER" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SALARY" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="POSITION" type="varchar2(100)"/>
+            <column name="BIRTHDATE" type="date"/>
+            <column name="REGISTRATION_DATE" type="date"/>
+            <column name="FOOTBALL_CLUB" type="varchar2(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="armel" labels="DB-INIT-3, 1.0.0">
+        <comment>Create player position table</comment>
+        <createTable tableName="PLAYER_POSITION">
+            <column name="NAME" type="varchar2(50)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="DESCRIPTION" type="varchar2(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="armel" labels="DB-INIT-4, 1.0.0">
+        <comment>Add PLAYER_FOOTBALL_CLUB foreign key to PLAYER table</comment>
+        <addForeignKeyConstraint baseTableName="PLAYER" baseColumnNames="FOOTBALL_CLUB"
+                                 constraintName="PLAYER_FOOTBALL_CLUB" referencedTableName="FOOTBALL_CLUB"
+                                 referencedColumnNames="ID"/>
+    </changeSet>
+
+    <changeSet id="6" author="armel" labels="DB-INIT-5, 1.0.0">
+        <comment>Add PLAYER_POSITION foreign key to PLAYER table</comment>
+        <addForeignKeyConstraint baseTableName="PLAYER" baseColumnNames="POSITION" constraintName="PLAYER_POSITION"
+                                 referencedTableName="PLAYER_POSITION"
+                                 referencedColumnNames="NAME"/>
+    </changeSet>
+
+    <changeSet id="7" author="armel" labels="DB-INIT-6, 1.0.0">
+        <insert tableName="PLAYER_POSITION">
+            <column name="NAME">STRIKER</column>
+        </insert>
+        <insert tableName="PLAYER_POSITION">
+            <column name="NAME">WINGER</column>
+        </insert>
+        <insert tableName="PLAYER_POSITION">
+            <column name="NAME">CENTRAL_MIDFIELDER</column>
+        </insert>
+        <insert tableName="PLAYER_POSITION">
+            <column name="NAME">DEFENSIVE_MIDFIELDER</column>
+        </insert>
+        <insert tableName="PLAYER_POSITION">
+            <column name="NAME">ATTACKING_MIDFIELDER</column>
+        </insert>
+        <insert tableName="PLAYER_POSITION">
+            <column name="NAME">CENTER_BACK</column>
+        </insert>
+        <insert tableName="PLAYER_POSITION">
+            <column name="NAME">FULL_BACK</column>
+        </insert>
+        <insert tableName="PLAYER_POSITION">
+            <column name="NAME">GOAL_KEEPER</column>
+        </insert>
+        <rollback>
+            <delete tableName="player_position"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

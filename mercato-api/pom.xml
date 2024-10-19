@@ -23,6 +23,7 @@
         <java.version>21</java.version>
         <openapi.version>2.6.0</openapi.version>
         <mapstruct.version>1.6.0</mapstruct.version>
+        <liquibase.version>4.27.0</liquibase.version>
         <sonar.organization>binark</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
@@ -45,6 +46,11 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>${liquibase.version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -107,6 +113,14 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
+                <configuration>
+                    <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
                 </configuration>
             </plugin>
         </plugins>
