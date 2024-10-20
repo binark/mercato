@@ -21,4 +21,8 @@ public interface PlayerConverter {
 
     @Mapping(target = "position", source = "position.name")
     PlayerOutput fromEntityToOutput(Player entity);
+
+    @Mapping(target = "club", ignore = true)
+    @Mapping(target = "position", source = "position.name")
+    PlayerOutput fromEntityToOutputWithoutClub(Player entity);
 }

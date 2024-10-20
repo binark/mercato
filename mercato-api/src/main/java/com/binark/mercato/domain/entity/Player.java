@@ -23,6 +23,7 @@ public class Player {
     @Column(name = "LASTNAME", nullable = false, length = 100)
     private String lastname;
 
+    @Column(name = "FIRSTNAME", length = 100)
     private String firstname;
 
     @Column(name = "PLAYER_NAME", nullable = false, length = 100)
@@ -35,12 +36,16 @@ public class Player {
     private BigDecimal salary;
 
     @ManyToOne
+    @JoinColumn(name = "POSITION")
     private PlayerPosition position;
 
+    @Column(name = "BIRTHDATE")
     private LocalDate birthdate;
 
+    @Column(name = "REGISTRATION_DATE")
     private LocalDate registrationDate;
 
     @ManyToOne
+    @JoinColumn(name = "FOOTBALL_CLUB")
     private FootballClub club;
 }

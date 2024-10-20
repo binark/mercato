@@ -67,6 +67,7 @@ class RegisterPlayerUseCaseImplTest {
         Mockito.verify(playerPositionService).getPosition(input.getPosition());
         Mockito.verify(converter).fromEntityToOutput(Mockito.any(Player.class));
         Mockito.verify(converter).fromInputToEntity(input);
+        Mockito.verify(playerService).save(Mockito.any(Player.class));
     }
 
     private RegisterPlayerInput buildInput() {
