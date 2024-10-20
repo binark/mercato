@@ -14,13 +14,13 @@
             <column name="ID" type="varchar2(255)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="NAME" type="varchar2(50)">
+            <column name="NAME" type="varchar2(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ACRONYM" type="varchar2(10)">
+            <column name="ACRONYM" type="varchar2(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="SLOGAN" type="varchar2(100)"/>
+            <column name="SLOGAN" type="varchar2(255)"/>
             <column name="BUDGET" type="decimal">
                 <constraints nullable="false"/>
             </column>

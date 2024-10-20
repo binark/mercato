@@ -3,3 +3,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/mercato
     username: postgres
     password: postgres
+management:
+  endpoints:
+    web:
+      exposure:
+        include: httpexchanges
