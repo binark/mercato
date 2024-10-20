@@ -1,0 +1,10 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /api
+spring:
+  liquibase:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create

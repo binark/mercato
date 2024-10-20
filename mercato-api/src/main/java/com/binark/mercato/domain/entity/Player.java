@@ -1,4 +1,4 @@
-package com.binark.mercato.domain;
+package com.binark.mercato.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

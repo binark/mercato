@@ -1,4 +1,4 @@
-package com.binark.mercato.domain;
+package com.binark.mercato.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,13 +22,13 @@ public class FootballClub {
     @UuidGenerator
     private String id;
 
-    @Column(name = "NAME", nullable = false, length = 50)
+    @Column(name = "NAME", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "ACRONYM", nullable = false, length = 10)
+    @Column(name = "ACRONYM", nullable = false, length = 20)
     private String acronym;
 
-    @Column(name = "SLOGAN", length = 100)
+    @Column(name = "SLOGAN")
     private String slogan;
 
     @Column(name = "BUDGET", precision = 2, nullable = false)
