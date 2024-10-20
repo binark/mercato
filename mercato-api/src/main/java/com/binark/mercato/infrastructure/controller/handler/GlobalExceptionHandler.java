@@ -1,6 +1,9 @@
 package com.binark.mercato.infrastructure.controller.handler;
 
 import com.binark.mercato.domain.dto.output.RequestError;
+import com.binark.mercato.exception.InvalidInputException;
+import com.binark.mercato.exception.MercatoApiException;
+import com.binark.mercato.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 /**
  * The global exception handler, handles all exceptions from controllers
@@ -41,10 +45,23 @@ public class GlobalExceptionHandler {
      * @return {@link RequestError} error data
      */
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class, NoResourceFoundException.class})
     public RequestError handleResourceNotFoundException(Exception e) {
         log.error(REQUEST_ERROR, e);
         return new RequestError("NOT FOUND", "Resource not found");
+    }
+
+    /**
+     * Handle common mercato api exceptions
+     *
+     * @param mae {@link MercatoApiException} The thrown exception
+     * @return {@link RequestError} error data
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = {InvalidInputException.class, NotFoundException.class})
+    public RequestError handleResourceNotFoundException(MercatoApiException mae) {
+        log.error(REQUEST_ERROR, mae);
+        return new RequestError(mae.getCode(), mae.getMessage());
     }
 
     /**
