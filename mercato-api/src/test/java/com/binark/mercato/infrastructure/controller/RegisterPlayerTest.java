@@ -150,7 +150,7 @@ class RegisterPlayerTest extends MockMvcTestConfiguration {
                .andExpect(MockMvcResultMatchers.status().isCreated())
                .andExpectAll(MockMvcResultMatchers.jsonPath("$.id").isNotEmpty(),
                              MockMvcResultMatchers.jsonPath("$.lastname").value(LASTNAME),
-                             MockMvcResultMatchers.jsonPath("$.club").isEmpty());
+                             MockMvcResultMatchers.jsonPath("$.club").doesNotExist());
     }
 
     @Test
@@ -191,6 +191,6 @@ class RegisterPlayerTest extends MockMvcTestConfiguration {
                .andExpect(MockMvcResultMatchers.status().isCreated())
                .andExpectAll(MockMvcResultMatchers.jsonPath("$.id").isNotEmpty(),
                              MockMvcResultMatchers.jsonPath("$.lastname").value(LASTNAME),
-                             MockMvcResultMatchers.jsonPath("$.position").isEmpty());
+                             MockMvcResultMatchers.jsonPath("$.position").doesNotExist());
     }
 }

@@ -20,4 +20,10 @@ class PlayerConverterTest {
         PlayerOutput output = converter.fromEntityToOutput(null);
         Assertions.assertThat(output).isNull();
     }
+
+    @Test
+    void fromNullToOutputWithoutClub() {
+        PlayerOutput output = converter.fromEntityToOutputWithoutClub(null);
+        Assertions.assertThat(output).isNull();
+    }
 }
