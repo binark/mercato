@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-class FootballClubControllerTest extends MockMvcTestConfiguration {
+class CreateFootballClubTest extends MockMvcTestConfiguration {
 
     @Test
     @SneakyThrows

@@ -4,7 +4,7 @@ import com.binark.mercato.core.converter.FootballClubConverter;
 import com.binark.mercato.core.service.FootballClubService;
 import com.binark.mercato.core.usecase.CreateFootballClubUseCase;
 import com.binark.mercato.domain.dto.input.CreateFootballClubInput;
-import com.binark.mercato.domain.dto.output.CreateFootballClubOutput;
+import com.binark.mercato.domain.dto.output.FootballClubOutput;
 import com.binark.mercato.domain.entity.FootballClub;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class CreateFootballClubUseCaseImpl implements CreateFootballClubUseCase 
 
     @Override
     @Transactional
-    public CreateFootballClubOutput execute(CreateFootballClubInput input) {
+    public FootballClubOutput execute(CreateFootballClubInput input) {
         FootballClub footballClub = converter.fromInputToEntity(input);
         footballClub = footballClubService.save(footballClub);
         return converter.fromEntityToOutput(footballClub);

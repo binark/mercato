@@ -1,5 +1,6 @@
 package com.binark.mercato.domain.dto.output;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateFootballClubOutput {
+public class FootballClubOutput {
     @Schema(description = "The football club identifier")
     private String id;
 
@@ -28,5 +29,6 @@ public class CreateFootballClubOutput {
     private BigDecimal budget;
 
     @Schema(description = "The football club birthdate", example = "2024-19-10")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
 }
