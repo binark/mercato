@@ -4,10 +4,7 @@ import com.binark.mercato.domain.dto.output.FootballClubOutput;
 import com.binark.mercato.domain.entity.FootballClub;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 class FootballClubConverterTest {
 
     FootballClubConverter footballClubConverter = new FootballClubConverterImpl();

@@ -1,6 +1,7 @@
 package com.binark.mercato.core.service;
 
 import com.binark.mercato.domain.entity.FootballClub;
+import com.binark.mercato.exception.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -24,4 +25,13 @@ public interface FootballClubService {
      * @return {@link Page} of {@link FootballClub}
      */
     Page<FootballClub> search(Pageable pageable);
+
+    /**
+     * Get football club by id
+     *
+     * @param id The football club id
+     * @return {@link FootballClub} The retrieved football club
+     * @throws NotFoundException If football club doesn't exist
+     */
+    FootballClub getClub(String id) throws NotFoundException;
 }

@@ -5,6 +5,11 @@ server:
 spring:
   liquibase:
     enabled: false
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:test-data.sql
   jpa:
     hibernate:
       ddl-auto: create
+    defer-datasource-initialization: true
