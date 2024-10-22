@@ -34,7 +34,11 @@ user: **postgres** and password: **postgres**
 
 A swagger api documentation has been generated and is accessible from that link:
 http://localhost:8080/api/swagger-ui/index.html  
-If you try to run search, ensure that the ***sort*** parameter is a string ```id,desc``` instead of an array ```[]```
+
+# Advanced Search
+
+This project has advanced search for players. This feature has been made with the help of the maven package [Spring
+Query Predicate](https://github.com/binark/spring-query-predicate)
 
 # Tests Execution
 

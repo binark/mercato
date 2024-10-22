@@ -3,6 +3,7 @@ package com.binark.mercato.core.service;
 import com.binark.mercato.domain.entity.Player;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 /**
  * Player service
@@ -33,4 +34,13 @@ public interface PlayerService {
      * @return {@link Page} of {@link Player}
      */
     Page<Player> find(Pageable pageable);
+
+    /**
+     * Find player using Spring Query Specifications
+     *
+     * @param specification {@link Specification} The query specifications
+     * @param pageable      The pagination parameters
+     * @return {@link Page} of {@link Player}
+     */
+    Page<Player> find(Specification<Player> specification, Pageable pageable);
 }

@@ -81,4 +81,62 @@ class SearchPlayersTest extends MockMvcTestConfiguration {
                              MockMvcResultMatchers.jsonPath("$.content")
                                                   .value(Matchers.hasSize(Matchers.greaterThanOrEqualTo(2))));
     }
+
+    @Test
+    @SneakyThrows
+    void shouldReturnPlayersWithLastNameContainsFoo() {
+        CreateFootballClubInput clubInput = CreateFootballClubInput.builder()
+                                                                   .acronym(ACRONYM)
+                                                                   .birthdate(BIRTHDATE)
+                                                                   .budget(BigDecimal.TEN)
+                                                                   .name(FOOTBALL_CLUB_NAME)
+                                                                   .build();
+
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.post(FOOTBALL_CLUB_PATH)
+                                                                      .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                                                      .content(mapper.writeValueAsString(clubInput)))
+                                       .andDo(MockMvcResultHandlers.print())
+                                       .andExpect(MockMvcResultMatchers.status().isCreated())
+                                       .andReturn()
+                                       .getResponse()
+                                       .getContentAsString();
+
+        FootballClubOutput createdFootballClub = mapper.readValue(responseString, FootballClubOutput.class);
+
+        RegisterPlayerInput requestInput = RegisterPlayerInput.builder()
+                                                              .lastname(LASTNAME)
+                                                              .firstname(FIRSTNAME)
+                                                              .jerseyNumber(JERSEY_NUMBER)
+                                                              .position(POSITION)
+                                                              .birthdate(BIRTHDATE)
+                                                              .salary(BigDecimal.TEN)
+                                                              .nickName(LASTNAME)
+                                                              .club(createdFootballClub.getId())
+                                                              .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(PLAYERS_PATH)
+                                              .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                              .content(mapper.writeValueAsString(requestInput)))
+               .andDo(MockMvcResultHandlers.print())
+               .andExpect(MockMvcResultMatchers.status().isCreated());
+
+        requestInput.setClub(null);
+        requestInput.setPosition(null);
+        requestInput.setLastname("abcFOOdef");
+
+        mockMvc.perform(MockMvcRequestBuilders.post(PLAYERS_PATH)
+                                              .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                              .content(mapper.writeValueAsString(requestInput)))
+               .andDo(MockMvcResultHandlers.print())
+               .andExpect(MockMvcResultMatchers.status().isCreated());
+
+        mockMvc.perform(MockMvcRequestBuilders.get(PLAYERS_PATH + "?lastname.containsIgnoreCase=Foo"))
+               .andDo(MockMvcResultHandlers.print())
+               .andExpect(MockMvcResultMatchers.status().isOk())
+               .andExpectAll(MockMvcResultMatchers.jsonPath("$.content").isArray(),
+                             MockMvcResultMatchers.jsonPath("$.content")
+                                                  .value(Matchers.hasSize(Matchers.greaterThanOrEqualTo(1))),
+                             MockMvcResultMatchers.jsonPath("$.content[0].lastname").value(Matchers.containsString(
+                                     "FOO")));
+    }
 }
