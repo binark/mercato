@@ -86,6 +86,14 @@
             <version>${openapi.version}</version>
         </dependency>
 
+        <!-- Maven package for advanced search -->
+        <dependency>
+            <groupId>io.github.binark</groupId>
+            <artifactId>spring-query-predicate</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+
         <!--  Testing dependencies  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -4,12 +4,14 @@ import com.binark.mercato.core.usecase.RegisterPlayerUseCase;
 import com.binark.mercato.core.usecase.SearchPlayersUserCase;
 import com.binark.mercato.domain.dto.input.RegisterPlayerInput;
 import com.binark.mercato.domain.dto.output.PlayerOutput;
+import com.binark.mercato.domain.dto.query_descriptor.PlayerQueryDescriptor;
 import com.binark.mercato.exception.MercatoApiException;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -45,13 +47,16 @@ public class PlayerController {
 
     /**
      * Search players
+     * <p>I used for this search a maven package that I created</p>
+     *  @see <a href="https://github.com/binark/spring-query-predicate">Spring Query Predicate</a>
      *
+     * @param query {@link PlayerQueryDescriptor} The search query
      * @param pageable Pagination parameters
      * @return {@link Page} of {@link PlayerOutput}
      */
     @GetMapping
     @Operation(summary = "Search a players")
-    public Page<PlayerOutput> search(Pageable pageable) {
-        return searchPlayersUserCase.execute(pageable);
+    public Page<PlayerOutput> search(@ParameterObject PlayerQueryDescriptor query, @ParameterObject Pageable pageable) {
+        return searchPlayersUserCase.execute(query, pageable);
     }
 }
